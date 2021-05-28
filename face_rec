@@ -1,0 +1,15 @@
+import cv2
+detect = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
+cam = cv2.VideoCapture("https://static.wikia.nocookie.net/disney/images/7/73/Tom_Cruise.jpg/revision/latest/top-crop/width/360/height/450?cb=20180613194630")
+check,img = cam.read()
+gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+face  =  detect.detectMultiScale(gray,1.20,5)
+
+
+
+for (x,y,w,h) in face:
+    cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
+cv2.imshow("Face Detect",img)
+cv2.waitKey(600000)
+cam.release
+cv2.destroyAllWindow()
